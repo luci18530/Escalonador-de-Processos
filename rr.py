@@ -1,12 +1,11 @@
 import copy
 
 class RR:
-    """Algoritmo de escalonamento Round Robin (RR)."""
+    #Algoritmo de escalonamento Round Robin (RR)
 
     def run(self, processos, quantum, debug=False):
-        """Executa o algoritmo RR com a duração do quantum especificada."""
-
-        procs = list(map(list, copy.deepcopy(processos)))
+        
+        procs = list(map(list, copy.deepcopy(processos))) # Cria uma copia da lista de processos
         tempo_retorno_total = tempo_resposta_total = tempo_espera_total = 0
         tempo_inicio = processos[0][0]
         tempo_atual = tempo_inicio

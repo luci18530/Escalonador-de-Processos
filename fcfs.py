@@ -1,14 +1,12 @@
 class FCFS:
     #First Come, First Served (FCFS)
 
-    def run(self, processos):
+    def run(self, processos, debug=False):
 
-        tempo_retorno = 0
-        tempo_resposta = 0
-        tempo_espera = 0 
-        # Armazena o instante de chegada do primeiro processo
+        tempo_retorno = tempo_resposta = tempo_espera = 0
+
+        # Define o tempo inicial com base no primeiro processo.
         tempo_inicio = processos[0][0]
-        # Soma das durações do processos
         soma_duracao = 0
 
         for n, processo in enumerate(processos):
@@ -18,21 +16,18 @@ class FCFS:
                 tempo_resposta += delta_tempo
                 tempo_espera += delta_tempo
 
-            # Soma a duração de cada processo
+            # Atualiza a soma das durações e o tempo de retorno.
             soma_duracao += processo[1]
-
-            # Tempo total ate o fim do processo menos a diferenca entre o tempo de
-            # chegado do processo atual e o tempo inicial
             tempo_retorno += soma_duracao - (processo[0] - tempo_inicio)
 
+            if debug:
+                print(f"FCFS: Executando processo {n+1} com chegada em {processo[0]} e duração de {processo[1]}")
+                print(f"Tempo atual: {soma_duracao}")    
+                print("-"*50) 
 
-
-        # converte para string, substitui ponto por virgula, com uma casa decimal
         n_processos = len(processos)
         tempo_retorno_medio = f"{tempo_retorno / n_processos:.1f}".replace('.', ',')
         tempo_resposta_medio = f"{tempo_resposta / n_processos:.1f}".replace('.', ',')
         tempo_espera_medio = f"{tempo_espera / n_processos:.1f}".replace('.', ',')
 
-        # Retorna uma tupla contendo o tempo de retorno medio, o tempo de
-        # resposta medio e o tempo de espera medio, respectivamente
         return (tempo_retorno_medio, tempo_resposta_medio, tempo_espera_medio)
